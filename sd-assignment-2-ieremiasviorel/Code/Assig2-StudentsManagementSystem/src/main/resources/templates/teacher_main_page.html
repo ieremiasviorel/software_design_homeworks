@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="ISO-8859-1">
+	<link rel="stylesheet" href="/css/teacher_main_page.css"/>
+	<script src="/js/teacher_main_page.js"></script>
+	<script src="https://code.jquery.com/jquery-3.0.0.min.js"></script>
+	<title>Main Page</title>
+</head>
+<body>
+	<!-- Tab links -->
+	<div class="tab">
+ 		<button class="tablinks" onclick="openTab(event, 'Profile')">Profile</button>
+ 		<button class="tablinks" onclick="openTab(event, 'Grading')">Grading</button>
+	</div>
+	
+	<!-- Tab content -->
+	<div id="Profile" class="tabcontent">
+		<h3 th:text="${loggedInTeacher.firstName + ' ' + loggedInTeacher.lastName}"></h3>
+		<!-- The modal -->
+		<div id="editProfileModal" class="modal">
+			<div class="modal-content">
+				<form action="#" th:action="@{/teachers/updateInfo}" method="post">
+					<h3 th:text="${loggedInTeacher.firstName + ' ' + loggedInTeacher.lastName}"></h3>
+					<table>
+						<tr>
+							<td>First Name</td>
+							<td><p th:text="${loggedInTeacher.firstName}"></td>
+						</tr>
+						<tr>
+							<td>Last Name</td>
+							<td><p th:text="${loggedInTeacher.lastName}"></td>
+						</tr>
+						<tr>
+							<td>ID Number</td>
+							<td><p th:text="${loggedInTeacher.idNumber}"></td>
+						</tr>
+						<tr>
+							<td>Address</td>
+							<td><input type="text" name="address" th:value="${loggedInTeacher.address}"></td>
+						</tr>
+						<tr>
+							<td>Email</td>
+							<td><input type="text" name="email" th:value="${loggedInTeacher.email}"></td>
+						</tr>
+						<tr>
+							<td>Phone</td>
+							<td><input type="text" name="phone" th:value="${loggedInTeacher.phone}"></td>
+						</tr>
+						<tr>
+							<td>User Name</td>
+							<td><p th:text="${loggedInTeacher.username}"></td>
+						</tr>
+						<tr>
+							<td>Password</td>
+							<td><input type="password" name="passwrod"></td>
+						</tr>
+					</table>
+					<button class="modalButton" type="submit">Save</button>
+					<button class="modalButton" id="closeEditProfileBtn" type="reset" onclick="closeModal()">Cancel</button>
+				</form>
+  			</div>
+		</div>
+		
+		<!-- The modal trigger button -->
+		<button id="editProfileBtn" onclick="openModal()">Edit</button>
+		
+		<fieldset>
+			<legend>Personal Info</legend>
+			<table>
+				<tr>
+					<td>First Name</td>
+					<td><p th:text="${loggedInTeacher.firstName}"></td>
+				</tr>
+				<tr>
+					<td>Last Name</td>
+					<td><p th:text="${loggedInTeacher.lastName}"></td>
+				</tr>
+				<tr>
+					<td>ID Number</td>
+					<td><p th:text="${loggedInTeacher.idNumber}"></td>
+				</tr>
+				<tr>
+					<td>Address</td>
+					<td><p th:text="${loggedInTeacher.address}"></td>
+				</tr>
+				<tr>
+					<td>Email</td>
+					<td><p th:text="${loggedInTeacher.email}"></td>
+				</tr>
+				<tr>
+					<td>Phone</td>
+					<td><p th:text="${loggedInTeacher.phone}"></td>
+				</tr>
+			</table>
+		</fieldset>
+		<fieldset>
+			<legend>Account Info</legend>
+			<table>
+				<tr>
+					<td>User Name</td>
+					<td><p th:text="${loggedInTeacher.username}"></td>
+				</tr>
+				<tr>
+					<td>Status</td>
+					<td><p th:text="${loggedInTeacher.status}"></td>
+				</tr>
+				<tr>
+					<td>Registration Date</td>
+					<td><p th:text="${loggedInTeacher.registrationDate}"></td>
+				</tr>
+			</table>
+		</fieldset>
+	</div>
+	
+	<!-- Tab content -->
+	<div id="Grading" class="tabcontent">
+		<h3 th:text="${loggedInTeacher.firstName + ' ' + loggedInTeacher.lastName}"></h3>
+		
+		<div class="tab">
+			<button class="courseTablinks" th:each="enrollments : ${enrolledStudents}" th:text="${enrollments[0].course.code}" th:id="${enrollments[0].course.code}" onclick="openCourseTab(event)"></button>
+		</div>
+		
+		<div class="courseTabContent" th:each="enrollments : ${enrolledStudents}" th:id="${enrollments[0].course.code + 'Tab'}">
+			<table>
+				<tr>
+					<th>First Name</th>
+					<th>Last Name</th>
+					<th>Group</th>
+					<th>Grade</th>
+				</tr>
+				<tr th:each="enrollment : ${enrollments}">
+					<td th:text="${enrollment.student.firstName}"></td>
+					<td th:text="${enrollment.student.lastName}"></td>
+					<td th:text="${enrollment.student.group.number}"></td>			
+					<td th:if="${enrollment.grade != null}" th:text="${enrollment.grade}"></td>
+					<td th:unless="${enrollment.grade != null}">Not graded</td>
+			</table>
+		</div>
+		
+		<div id="studentReports" class="modal">
+			
+		</div>
+	</div>
+</body>
+</html>
