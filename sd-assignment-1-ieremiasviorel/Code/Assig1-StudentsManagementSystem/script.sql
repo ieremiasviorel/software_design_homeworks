@@ -9,16 +9,6 @@ CREATE TABLE `students_management`.`students` (
   `id_number` VARCHAR(45) NULL,
   `email` VARCHAR(45) NULL,
   PRIMARY KEY (`id`));
-  
-CREATE TABLE `students_management`.`new_table` (
-  `id` INT NOT NULL,
-  `first_name` VARCHAR(45) NULL,
-  `last_name` VARCHAR(45) NULL,
-  `username` VARCHAR(45) NULL,
-  `password` VARCHAR(45) NULL,
-  `id_number` VARCHAR(45) NULL,
-  `email` VARCHAR(45) NULL,
-  PRIMARY KEY (`id`));
 
 CREATE TABLE `students_management`.`teachers` (
   `id` INT NOT NULL,
@@ -56,6 +46,7 @@ CREATE TABLE `students_management`.`teaching` (
 ALTER TABLE `students_management`.`enrollments` 
 ADD INDEX `student_id_idx` (`student_id` ASC),
 ADD INDEX `course_id_idx` (`course_id` ASC);
+
 ALTER TABLE `students_management`.`enrollments` 
 ADD CONSTRAINT `student_id`
   FOREIGN KEY (`student_id`)

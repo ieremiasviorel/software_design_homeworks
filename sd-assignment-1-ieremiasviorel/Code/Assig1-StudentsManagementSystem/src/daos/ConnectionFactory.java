@@ -11,10 +11,10 @@ import java.util.logging.Logger;
 public class ConnectionFactory {
 
 	private static final Logger LOGGER = Logger.getLogger(ConnectionFactory.class.getName());
-	private static final String DRIVER = "com.mysql.jdbc.Driver";
-	private static final String DBURL = "jdbc:mysql://localhost:3306/students_management?autoReconnect=true&useSSL=false";
-	private static final String USER = "root";
-	private static final String PASS = "user";
+	private static final String DRIVER = "org.postgresql.Driver";
+	private static final String DBURL = "jdbc:postgresql://localhost/assig_1_students_management";
+	private static final String USER = "postgres";
+	private static final String PASS = "postgres";
 
 	private static ConnectionFactory singleInstance = new ConnectionFactory();
 

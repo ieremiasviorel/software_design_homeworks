@@ -365,8 +365,8 @@ public class TeacherView extends JFrame {
 		String courseCode = this.tfCourseCode.getText();
 		String courseDescription = this.txtCourseDescription.getText();
 		LocalDate courseStartDate = LocalDate.parse(this.tfCourseStartDate.getText(), dateFormat);
-		LocalDate courseEndDate = LocalDate.parse(this.tfCourseStartDate.getText(), dateFormat);
-		LocalDate courseExamDate = LocalDate.parse(this.tfCourseStartDate.getText(), dateFormat);
+		LocalDate courseEndDate = LocalDate.parse(this.tfCourseEndDate.getText(), dateFormat);
+		LocalDate courseExamDate = LocalDate.parse(this.tfCourseExamDate.getText(), dateFormat);
 
 		return new CourseInformation(courseName, courseCode, courseDescription, courseStartDate, courseEndDate,
 				courseExamDate);

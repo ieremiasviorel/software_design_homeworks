@@ -23,13 +23,13 @@ public abstract class AbstractDAO<T extends DBRecord> {
 		StringBuilder sb = new StringBuilder();
 		sb.append("SELECT MAX(id) FROM ");
 		sb.append(this.getTableName() + ";");
-		
+
 		Connection connection = ConnectionFactory.getConnection();
 		PreparedStatement statement = null;
 		ResultSet result = null;
-		
+
 		Long id = null;
-		
+
 		try {
 			statement = connection.prepareStatement(sb.toString());
 			result = statement.executeQuery();
@@ -42,14 +42,13 @@ public abstract class AbstractDAO<T extends DBRecord> {
 			ConnectionFactory.close(statement);
 			ConnectionFactory.close(connection);
 		}
-		
 		return id;
 	}
-	
+
 	public void insert(T t) {
 
 		Connection connection = ConnectionFactory.getConnection();
-		
+
 		t.setId(this.nextID);
 		PreparedStatement insertStatement = createInsertQuery(t, connection);
 
@@ -94,7 +93,7 @@ public abstract class AbstractDAO<T extends DBRecord> {
 			return null;
 		}
 	}
-	
+
 	public List<T> findAll() {
 
 		Connection connection = ConnectionFactory.getConnection();
@@ -130,7 +129,7 @@ public abstract class AbstractDAO<T extends DBRecord> {
 			return sb.toString();
 		}
 	}
-	
+
 	protected abstract List<T> createObjects(ResultSet resultSet);
 
 	public void update(T t) {
