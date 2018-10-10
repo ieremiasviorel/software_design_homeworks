@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Initiatives Platform</title>
+<link rel="stylesheet" type="text/css" href="css/app-bar.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body th:fragment="app-bar">
+	<div class="icon-bar">
+		<a class="active" href="/"><i class="fa fa-home"></i></a> 
+		<div th:if="${loggedInUser}">
+			<a href="projects/add"><i class="fa fa-puzzle-piece"></i></a>
+		</div>
+		<div th:unless="${loggedInUser}">
+			<a href="#"><i class="fa fa-american-sign-language-interpreting"></i></a>
+		</div>
+		<a href="favorites"><i class="fa fa-star"></i></a>
+		<div th:if="${loggedInUser}">
+			<a href="editProfile"><i class="fa fa-user"></i></a>
+		</div>
+		<div th:unless="${loggedInUser}">
+			<a href="login"><i class="fa fa-sign-in"></i></a>
+		</div>
+		<div th:if="${loggedInUser}">
+			<a href="logout"><i class="fa fa-sign-out"></i></a>
+		</div>
+		<div th:unless="${loggedInUser}">
+			<a href="register"><i class="fa fa-plus"></i></a>
+		</div>
+	</div>
+</body>
+</html>
